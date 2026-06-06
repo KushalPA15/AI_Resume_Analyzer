@@ -1,6 +1,5 @@
-.DS_Store
-/node_modules/
-
-# React Router
-/.react-router/
-/build/
+@"
+node_modules/
+build/
+.react-router/
+"@ | Out-File -Encoding utf8 .gitignore
