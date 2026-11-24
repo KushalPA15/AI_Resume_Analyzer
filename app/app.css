@@ -56,6 +56,9 @@ form {
   .gradient-border {
     @apply bg-gradient-to-b from-light-blue-100 to-light-blue-200 p-4 rounded-2xl;
   }
+  .preview-wrapper {
+    @apply bg-gray-50/50 p-2 rounded-2xl border border-gray-100/80 shadow-[inset_0_2px_4px_rgba(0,0,0,0.01)];
+  }
   .primary-button {
     @apply primary-gradient text-white rounded-full px-4 py-2 cursor-pointer w-full;
   }
@@ -81,15 +84,15 @@ form {
     @apply flex flex-col items-center gap-8 max-w-4xl text-center;
   }
   .resumes-section {
-    @apply flex flex-wrap max-lg:flex-col gap-6 items-start  w-full max-w-[1850px] justify-evenly;
+    @apply flex flex-wrap max-lg:flex-col gap-8 items-start w-full max-w-[1600px] justify-center;
   }
 
   .resume-card {
-    @apply flex flex-col gap-8 h-[560px] w-full lg:w-[450px] xl:w-[490px] bg-white rounded-2xl p-4;
+    @apply flex flex-col gap-6 h-[580px] w-full lg:w-[450px] xl:w-[480px] bg-white rounded-3xl p-6 border border-gray-100/80 shadow-[0_8px_30px_rgb(0,0,0,0.02)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] hover:border-gray-200/80;
   }
 
   .resume-card-header {
-    @apply flex flex-row gap-2 justify-between min-h-[110px] max-sm:flex-col items-center max-md:justify-center max-md:items-center;
+    @apply flex flex-row gap-4 justify-between items-start w-full min-h-[80px];
   }
 
   .feedback-section {
@@ -149,4 +152,42 @@ form {
   to {
     opacity: 1;
   }
+}
+
+/* Custom Sleek Scrollbar for Resume Preview Container */
+.resume-preview-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.resume-preview-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.resume-preview-container::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 9999px;
+  transition: background 0.2s ease;
+}
+
+.resume-preview-container::-webkit-scrollbar-thumb:hover {
+  background: #cbd5e1;
+}
+
+@keyframes scrollWheel {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(4px);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-scroll-wheel {
+  animation: scrollWheel 1.8s infinite ease-in-out;
 }

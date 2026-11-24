@@ -3,10 +3,11 @@ import {useDropzone} from 'react-dropzone'
 import { formatSize } from '../lib/utils'
 
 interface FileUploaderProps {
+    selectedFile?: File | null;
     onFileSelect?: (file: File | null) => void;
 }
 
-const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
+const FileUploader = ({ selectedFile, onFileSelect }: FileUploaderProps) => {
     const onDrop = useCallback((acceptedFiles: File[]) => {
         const file = acceptedFiles[0] || null;
 
@@ -15,14 +16,14 @@ const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
 
     const maxFileSize = 20 * 1024 * 1024; // 20MB in bytes
 
-    const {getRootProps, getInputProps, isDragActive, acceptedFiles} = useDropzone({
+    const {getRootProps, getInputProps, isDragActive} = useDropzone({
         onDrop,
         multiple: false,
         accept: { 'application/pdf': ['.pdf']},
         maxSize: maxFileSize,
     })
 
-    const file = acceptedFiles[0] || null;
+    const file = selectedFile !== undefined ? selectedFile : null;
 
 
 
@@ -45,8 +46,10 @@ const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
                                     </p>
                                 </div>
                             </div>
-                            <button className="p-2 cursor-pointer" onClick={(e) => {
-                                onFileSelect?.(null)
+                            <button className="p-2 cursor-pointer" type="button" onClick={(e) => {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                onFileSelect?.(null);
                             }}>
                                 <img src="/icons/cross.svg" alt="remove" className="w-4 h-4" />
                             </button>
